@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+</head>
+<body>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+
+<script>
+
+
+function handleMotion(event) {
+  //alert('received motion event');
+  //if more than 1 second has passed since the last this ran
+  //then
+    //$.get('process_data.php?x=' + event.acceleration.x + '&y=' + event.acceleration.y + '&z=' + event.acceleration.z)
+
+  $('#data').html(event.acceleration.x);
+
+}
+
+
+
+  $(document).ready(function() {
+    alert('ready');
+    if (
+      DeviceMotionEvent &&
+      typeof DeviceMotionEvent.requestPermission === "function"
+    ) {
+      DeviceMotionEvent.requestPermission();
+    }
+    
+      window.addEventListener("devicemotion", handleMotion);
+  });
+</script>
+
+<div id="data">This will have accel data</div>
+
+</body>
+</html>
+
