@@ -18,13 +18,14 @@
 </head>
 <body>
 <main role="main" class="container">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
 
 
 
 <div class="p-3 mb-2 bg-secondary" id="demo-div">
-<a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Begin Swing</a>
+<a id="start_demo" class="btn btn-lg btn-success py-1" href="#" role="button">Begin</a>
 <p style="margin-top:1rem;">Num. of datapoints: <span class="badge badge-warning" id="num-observed-events">0</span></p>
 
 
@@ -67,7 +68,7 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
 
 function handleMotion(event) {
 
-    if (event.acceleration.x>40){
+    if (event.acceleration.x>30){
         document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
     }
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
