@@ -68,9 +68,27 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
 
 function handleMotion(event) {
 
-    if (event.acceleration.x>30){
-        document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
+  var measure = [
+    ["x"],
+    ["y"],
+    ["z"],
+  ];
+  am_measuring = 0;
+    if (event.acceleration.x>20){
+        am_measuring = 1;
+      if (am_measuring == 1){
+      measure[1].push(event.acceleration.x);
+      measure[2].push(event.acceleration.y);
+      measure[3].push(event.acceleration.z);
+        if (event.acceleration.x<20){
+        am_measuring = 0;
+          if (am_measuring == 0){
+            document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
+          }
+        }
+      }
     }
+
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
   updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
   updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
