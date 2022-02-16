@@ -73,21 +73,27 @@ function handleMotion(event) {
     ["y"],
     ["z"],
   ];
-  am_measuring = 0;
-    if (event.acceleration.x>20){
-        am_measuring = 1;
-      if (am_measuring == 1){
-      measure[1].push(event.acceleration.x);
-      measure[2].push(event.acceleration.y);
-      measure[3].push(event.acceleration.z);
-        if (event.acceleration.x<20){
-        am_measuring = 0;
-          if (am_measuring == 0){
-            document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
-          }
-        }
-      }
+    if ((event.acceleration.x>20 || y || z) && am_measuring == 0){
+      document.write("Started measuring <br />");
+      am_measuring = 1;
     }
+
+    if (am_measuring == 1){
+      measure["x"].push(event.acceleration.x);
+      measure["y"].push(event.acceleration.y);
+      measure["z"].push(event.acceleration.z);
+    }
+    
+    if (event.acceleration.x<20 && y < 20 && z){
+      document.write("Stopped measuring <br />");
+      am_measuring = 0;
+      document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
+      //encode the "measure" variable as JSON
+      //$.post(.....) to submit it to the server component
+    }
+
+      
+    
 
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
   updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
