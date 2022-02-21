@@ -1,3 +1,9 @@
+<?php
+
+header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+header("Cache-Control: post-check=0, pre-check=0", false);
+header("Pragma: no-cache");
+?>
 
 <!doctype html>
 <html lang="en">
@@ -5,7 +11,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Demo - Zyan's acceleration trial & error</title>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <title>JavaScript Sensor Access Demo</title>
     <style>
       #demo-div {color: lightgrey; border-radius: 0.3rem;}
@@ -18,7 +24,6 @@
 </head>
 <body>
 <main role="main" class="container">
-    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 
 
 
@@ -50,6 +55,9 @@
     
     
   </div>
+  <div id="debug">
+    Debug info here<br />
+  </div>
 </footer>
 <script>
 
@@ -66,6 +74,14 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
     document.getElementById(fieldName).innerHTML = value.toFixed(precision);
 }
 
+
+var am_measuring = 0;
+
+var measure = {'x':[], 'y':[], 'z':[]};
+
+
+
+
 function handleMotion(event) {
 
   updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
@@ -74,34 +90,46 @@ function handleMotion(event) {
 
   updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
-  var measure = [
-    ["x"],
-    ["y"],
-    ["z"],
-  ];
+  
 
-    am_measuring = 0;
+    
 
-    if ((event.acceleration.x>20 || y || z) && am_measuring == 0){
-      document.write("Started measuring <br />");
+    if ((event.acceleration.x>20 || event.acceleration.y > 20|| event.acceleration.z > 20) && am_measuring == 0){
+      $('#debug').append('Started measuring <br />');
       am_measuring = 1;
     }
 
-    if (am_measuring == 1){
+    if (am_measuring == 1) {
       measure["x"].push(event.acceleration.x);
       measure["y"].push(event.acceleration.y);
       measure["z"].push(event.acceleration.z);
     }
     
-    if (event.acceleration.x<20 && y < 20 && z){
-      document.write("Stopped measuring <br />");
-      am_measuring = 0;
-      document.write('\nx = ' + event.acceleration.x + '\ny = ' + event.acceleration.y + '\nz = ' + event.acceleration.z)
+    if (am_measuring == 1 && event.acceleration.x<20 && event.acceleration.y < 20 && event.acceleration.z < 20){
+      $('#debug').append('Stopped measuring <br />');
+      am_measuring = 2;
+      
+      $('#debug').append(JSON.stringify(measure));
+
+
+      $.ajax({
+        type: "POST",
+        url: "demo_store.php",
+        data: {"data": JSON.stringify(measure)}
+      });
       //encode the "measure" variable as JSON
       //$.post(.....) to submit it to the server component
     }
 
 }
+
+
+
+$.ajax({
+        type: "POST",
+        url: "demo_store.php",
+        data: {"data": JSON.stringify(measure)}
+      });
 
 let is_running = false;
 let demo_button = document.getElementById("start_demo");
