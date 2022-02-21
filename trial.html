@@ -34,7 +34,7 @@
 <h4>Accelerometer</h4>
 <ul>
   <li>X-axis: <span id="Accelerometer_x">0</span><span> m/s<sup>2</sup></span></li>
-  <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>2</sup></span></li>
+  <li>Y-axis: <span id="Accelerometer_y">0</span><span> m/s<sup>+2</sup></span></li>
   <li>Z-axis: <span id="Accelerometer_z">0</span><span> m/s<sup>2</sup></span></li>
   <li>Data Interval: <span id="Accelerometer_i">0</span><span> ms</span></li>
 </ul>
@@ -68,11 +68,20 @@ function updateFieldIfNotNull(fieldName, value, precision=10){
 
 function handleMotion(event) {
 
+  updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
+  updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
+  updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
+
+  updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
+
   var measure = [
     ["x"],
     ["y"],
     ["z"],
   ];
+
+    am_measuring = 0;
+
     if ((event.acceleration.x>20 || y || z) && am_measuring == 0){
       document.write("Started measuring <br />");
       am_measuring = 1;
@@ -92,16 +101,6 @@ function handleMotion(event) {
       //$.post(.....) to submit it to the server component
     }
 
-      
-    
-
-  updateFieldIfNotNull('Accelerometer_x', event.acceleration.x);
-  updateFieldIfNotNull('Accelerometer_y', event.acceleration.y);
-  updateFieldIfNotNull('Accelerometer_z', event.acceleration.z);
-
-  updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
-
-  
 }
 
 let is_running = false;
