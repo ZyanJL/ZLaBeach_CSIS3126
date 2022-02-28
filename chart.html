@@ -1,0 +1,46 @@
+
+
+<html>
+
+<body>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.4"></script>
+
+
+
+<script>
+
+swingdata = [
+    {'step':1,
+    'accel_x': -4.82736404234767,
+    'accel_y': 22.318135297036168,
+    'accel_z': 3.4792437987625595},
+    {'step':2,
+    'accel_x': 21.675252403795717,
+    'accel_y': 46.543729186248775,
+    'accel_z': 2.32324260244444},
+    {'step':3,
+    'accel_x': 40.13174851279258,
+    'accel_y': 66.56422583930492,
+    'accel_z': -1.8095979374051092}
+]
+
+
+plot = Plot.line(swingdata, {x: "step", y: "accel_x"}).plot();
+document.body.appendChild(plot);
+plot = Plot.line(swingdata, {x: "step", y: "accel_y"}).plot();
+document.body.appendChild(plot);
+plot = Plot.line(swingdata, {x: "step", y: "accel_z"}).plot();
+document.body.appendChild(plot);
+</script>
+
+
+
+
+<script>
+
+
+
+</script>
+
