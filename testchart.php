@@ -1,41 +1,49 @@
 <html>
 <body>
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+<script src="https://cdn.jsdelivr.net/npm/@observablehq/plot@0.4"></script>
+
+
 <?php
+
+
 
 // Here, we use single quotes for PHP and double quotes for JavaScript
 echo '<script type="text/javascript">';
-echo 'document.write("Hello World!")';
+//echo 'document.write("Hello World!")';
 
 $swingdata = file_get_contents('data.txt');
 $swingdata = json_decode($swingdata, 1);
-echo "<pre>";
-
-//print_r($swingdata);
-//echo $swingdata["x"] [0];
 
 
-for ($i = 0; $i < sizeof($swingdata[x]); $i++) {
+
+
+echo 'swingdata = [';
+for ($i = 0; $i < sizeof($swingdata["x"]); $i++) {
     
     
-    echo 'swingchart = [';
-        echo '{"step":$i,'
-        echo '"accel_x": $swingdata["x"] [$i],';
-        echo '"accel_y": $swingdata["y"] [$i],';
-        echo '"accel_z": $swingdata["z"] [$i];}';
     
-    print_r($swingchart);
+        echo '{"step":' . $i . ',' ;
+        echo '"accel_x": ' . $swingdata["x"] [$i]. ',' ;
+        echo '"accel_y": ' . $swingdata["y"] [$i]. ',' ;
+        echo '"accel_z": ' . $swingdata["z"] [$i]. '},' ;
     
-    
-    echo $swingdata["x"] [$i];
 }
 
-
-
-
-
-
-echo '</script>';
+echo '];';
 
 ?>
+
+plot = Plot.line(swingdata, {x: "step", y: "accel_x"}).plot();
+document.body.appendChild(plot);
+plot = Plot.line(swingdata, {x: "step", y: "accel_y"}).plot();
+document.body.appendChild(plot);
+plot = Plot.line(swingdata, {x: "step", y: "accel_z"}).plot();
+document.body.appendChild(plot);
+
+</script>
+
+
 </body>
 </html>
