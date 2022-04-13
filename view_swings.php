@@ -30,7 +30,7 @@ include 'session.php';
     if ($result->num_rows > 0) {
         //output data
         while ($row = $result->fetch_assoc()) {
-            echo "<br>" . "<a href='print_charts.php?file=" .  $row["filename"] . "'>" .  $row["filename"] . "</a>";
+            echo "<br>" . "<a href='print_charts.php?filename=" .  $row["filename"] . "'>" .  $row["filename"] . "</a>";
         }
     } else {
         echo "0 results";

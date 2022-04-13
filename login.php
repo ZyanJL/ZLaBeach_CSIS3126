@@ -17,9 +17,10 @@ if (isset($_POST['submit'])) {
 		print_r($row);
 		$_SESSION['user_name'] = $row['user_name'];
 		$_SESSION['user_id'] = $row['user_id'];
-		header("Location: welcome.php");
+		//header("Location: welcome.php");
+		echo ('loggine in');
 	} else {
-		echo "<script>alert('Woops! user_name or Password is Wrong.')</script>";
+		$user_error = "<script>alert('Woops! user_name or Password is Wrong.')</script>"; //set this to a variable and echo out in html 
 	}
 }
 
@@ -51,6 +52,7 @@ if (isset($_POST['submit'])) {
 			</div>
 			<div class="input-group">
 				<button name="submit" class="btn">Login</button>
+				<?php echo $user_error;?>
 			</div>
 			<p class="login-register-text">Don't have an account? <a href="register.php">Register Here</a>.</p>
 		</form>
