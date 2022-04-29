@@ -1,5 +1,5 @@
 <?php
-
+//app doesnt store data within cache to allow for multiple swings
 header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 header("Cache-Control: post-check=0, pre-check=0", false);
 header("Pragma: no-cache");
@@ -118,7 +118,7 @@ header("Pragma: no-cache");
       updateFieldIfNotNull('Accelerometer_i', event.interval, 2);
 
 
-
+      //if your golf swing exceeds 10 m/s the app will begin recording until the speed drops back below 10 m/s
 
 
       if ((event.acceleration.x > 10 || event.acceleration.y > 10 || event.acceleration.z > 10) && am_measuring == 0) {

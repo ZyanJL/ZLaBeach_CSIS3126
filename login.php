@@ -4,6 +4,7 @@ include 'session.php';
 
 error_reporting(E_ERROR | E_WARNING | E_PARSE);
 
+
 if (isset($_SESSION['user_name'])) {
 	header("Location: welcome.php");
 }
@@ -14,11 +15,10 @@ if (isset($_POST['submit'])) {
 	$result = mysqli_query($conn, $sql);
 	if ($result->num_rows > 0) {
 		$row = mysqli_fetch_assoc($result);
-		print_r($row);
 		$_SESSION['user_name'] = $row['user_name'];
 		$_SESSION['user_id'] = $row['user_id'];
-		//header("Location: welcome.php");
-		echo ('loggine in');
+		header("Location: welcome.php");
+		die();
 	} else {
 		$user_error = "<script>alert('Woops! user_name or Password is Wrong.')</script>"; //set this to a variable and echo out in html 
 	}

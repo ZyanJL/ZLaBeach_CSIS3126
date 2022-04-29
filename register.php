@@ -8,6 +8,8 @@ if (isset($_SESSION['user_name'])) {
 	header("Location: login.php");
 }
 
+$date = date("Y-m-d H:i:s");
+
 if (isset($_POST['submit'])) {
 	$user_name = mysqli_real_escape_string($conn, $_POST['user_name']);
 	$password = md5($_POST['password']);
@@ -17,8 +19,8 @@ if (isset($_POST['submit'])) {
 		$sql = "SELECT * FROM athlete WHERE user_name='$user_name'";
 		$result = mysqli_query($conn, $sql);
 		if (!$result->num_rows > 0) {
-			$sql = "INSERT INTO athlete (user_name, password)
-					VALUES ('$user_name', '$password')";
+			$sql = "INSERT INTO athlete (user_name, password, date)
+					VALUES ('$user_name', '$password', '$date')";
 			$result = mysqli_query($conn, $sql);
 			if ($result) {
 				echo "<script>alert('Wow! User Registration Completed.')</script>";
