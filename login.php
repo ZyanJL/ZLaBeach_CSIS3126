@@ -35,28 +35,35 @@ if (isset($_POST['submit'])) {
 
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="mainstyle.css">
 
 	<title>Login Form - Design Project</title>
 </head>
 
 <body>
-	<div class="container">
-		<form action="" method="POST" class="login-user_name">
-			<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
-			<div class="input-group">
-				<input type="user_name" placeholder="username" name="user_name" value="<?php echo $user_name; ?>" required>
-			</div>
-			<div class="input-group">
-				<input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
-			</div>
-			<div class="input-group">
-				<button name="submit" class="btn">Login</button>
-				<?php echo $user_error;?>
-			</div>
-			<p class="login-register-text">Don't have an account? <a href="register.php">Register Here</a>.</p>
-		</form>
-	</div>
+	<div class="homepage">
+		<h1>Welcome to the Golf Swing Web App</h1>
+		<h2>By: Zyan LaBeach</h2>
+		<h3>This application will allow you to practice your golf swing with just your mobile device!
+			You can record practice swings and charts will be generated to visualize how fast you swung your device in
+			meters per second squared.
+			Login and you can practice your golf swing whenever and wherever you want!</h3>
+		<div class="container">
+			<form action="" method="POST" class="login-user_name">
+				<p class="login-text" style="font-size: 2rem; font-weight: 800;">Login</p>
+				<div class="input-group">
+					<input type="user_name" placeholder="username" name="user_name" value="<?php echo $user_name; ?>" required>
+				</div>
+				<div class="input-group">
+					<input type="password" placeholder="Password" name="password" value="<?php echo $_POST['password']; ?>" required>
+				</div>
+				<div class="input-group">
+					<button name="submit" class="btn">Login</button>
+					<?php echo $user_error; ?>
+				</div>
+				<p class="login-register-text">Don't have an account? <a href="register.php">Register Here</a>.</p>
+			</form>
+		</div>
 </body>
 
 </html>

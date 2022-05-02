@@ -45,8 +45,8 @@ header("Pragma: no-cache");
 </head>
 
 <body>
-  <a href="phone_swing.php">PhoneSwing</a>
-  <a href="view_swings.php">view all swings</a>
+  <a href="welcome.php">Welcome Page</a>
+  <a href="view_swings.php">View my swings</a>
   <a href="logout.php">Logout</a>
 
   <main role="main" class="container">

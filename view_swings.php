@@ -1,4 +1,4 @@
-<?php 
+<?php
 include 'session.php';
 ?>
 <!DOCTYPE html>
@@ -12,7 +12,8 @@ include 'session.php';
 
 <body>
     <?php echo "<h1>Welcome " . $_SESSION['user_name'] . "</h1>"; ?>
-    <a href="phone_swing.php">PhoneSwing</a>
+    <a href="welcome.php">Welcome Page</a>
+    <a href="phone_swing.php">Record a Golf Swing</a>
     <a href="logout.php">Logout</a>
 
     <?php
@@ -22,9 +23,9 @@ include 'session.php';
 
     //query for all swings
     $sql = "SELECT filename FROM phone_swings WHERE user_id = " . $user_id;
-   
+
     //make query and get result
-    $result = mysqli_query($conn, $sql); 
+    $result = mysqli_query($conn, $sql);
 
     //fetch the resulting rows as an array of filenames
     if ($result->num_rows > 0) {
