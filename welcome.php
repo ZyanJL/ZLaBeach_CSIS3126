@@ -43,7 +43,7 @@ if (!isset($_SESSION['user_name'])) {
             </div>
         </div>
     </div>
-    <img src="baseball.gif" alt="baseball gif" style="width: 100%; height: 100%">
+    <img src="golf_swing.gif" alt="golf gif" style="width: 50%; margin-left: auto; margin-right: auto; display: block;">
 </body>
 
 </html>
